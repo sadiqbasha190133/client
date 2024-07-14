@@ -1,3 +1,290 @@
+// import axios from "axios";
+// import { setAlert } from "./alert";
+// import {
+//   GET_COURSES_STUDENT,
+//   GET_COURSE,
+//   POST_ERROR,
+//   GET_ATTENDANCE,
+//   GET_COURSES_FACULTY,
+//   GET_STUDENTS,
+//   MARK,
+//   GET_STUDENT_ATTENDANCE,
+//   UPDATE,
+//   GET_COMMENTS,
+//   ADD_COMMENT,
+//   ADD_POST,
+//   UNARCHIVE,
+//   ARCHIVE,
+//   FACULTY_LOADED,
+// } from "./types";
+
+// const BASE_URL = "https://attendance-hvr0.onrender.com";
+
+// //Get subjects
+// export const getCourses = () => async (dispatch) => {
+//   try {
+//     const res = await axios.get(`/api/faculty/courses`);
+
+//     dispatch({
+//       type: GET_COURSES_FACULTY,
+//       payload: res.data,
+//     });
+//   } catch (err) {
+//     dispatch({
+//       type: POST_ERROR,
+//       payload: { msg: err.response, status: err.response },
+//     });
+//   }
+// };
+
+// // Get attendance for a course
+// export const getAttendance = (course) => async (dispatch) => {
+//   try {
+//     const res = await axios.get(`/api/faculty/students/${course}`);
+
+//     dispatch({
+//       type: GET_ATTENDANCE,
+//       payload: res.data,
+//     });
+//   } catch (err) {
+//     dispatch({
+//       type: POST_ERROR,
+//       payload: { msg: err.response, status: err.response },
+//     });
+//   }
+// };
+
+// // Get attendance for a course
+// export const getStudents = (year) => async (dispatch) => {
+//   try {
+//     const res = await axios.get(`/api/faculty/students/${year}`);
+
+//     dispatch({
+//       type: GET_STUDENTS,
+//       payload: res.data,
+//     });
+//   } catch (err) {
+//     dispatch({
+//       type: POST_ERROR,
+//       payload: { msg: err.response, status: err.response },
+//     });
+//   }
+// };
+
+// // Get attendance for a course
+// export const getStudentAttendance =
+//   (year, roll, course) => async (dispatch) => {
+//     try {
+//       const res = await axios.get(
+//         `/api/faculty/attendance/${year}/${roll}/${course}`
+//       );
+
+//       dispatch({
+//         type: GET_STUDENT_ATTENDANCE,
+//         payload: res.data,
+//       });
+//     } catch (err) {
+//       dispatch({
+//         type: POST_ERROR,
+//         payload: { msg: err.response, status: err.response },
+//       });
+//     }
+//   };
+
+// // Add post
+// export const addPost = (formData) => async (dispatch) => {
+//   const config = {
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//   };
+
+//   try {
+//     const res = await axios.post(`/api/faculty/courses`, formData, config);
+
+//     dispatch({
+//       type: ADD_POST,
+//       payload: res.data,
+//     });
+
+//     dispatch(setAlert("Course Created", "success"));
+//   } catch (err) {
+//     dispatch({
+//       type: POST_ERROR,
+//       payload: { msg: err.response, status: err.response.status },
+//     });
+//   }
+// };
+
+// // Get attendance for a course
+// export const markAttendance =
+//   (year, roll, course, { date, status }) =>
+//   async (dispatch) => {
+//     const config = {
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//     };
+//     const formData = JSON.stringify({ date, status });
+
+//     try {
+//       const res = await axios.post(
+//         `/api/faculty/attendance/${year}/${roll}/${course}`,
+//         formData,
+//         config
+//       );
+//       console.log("FIRING");
+//       dispatch({
+//         type: MARK,
+//         payload: res.data,
+//       });
+
+//       dispatch(setAlert("Attendance marked", "success"));
+//     } catch (err) {
+//       dispatch({
+//         type: POST_ERROR,
+//         payload: { msg: err.response, status: err.response },
+//       });
+//     }
+//   };
+
+// // Get attendance for a course
+// export const updateAttendance =
+//   (year, roll, course, date, { status }) =>
+//   async (dispatch) => {
+//     const config = {
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//     };
+//     const formData = JSON.stringify({ status });
+//     console.log("FIRING");
+//     try {
+//       const res = await axios.put(
+//         `/api/faculty/attendance/${year}/${roll}/${course}/${date}`,
+//         formData,
+//         config
+//       );
+//       console.log("FIRING");
+//       dispatch({
+//         type: UPDATE,
+//         payload: res.data,
+//       });
+
+//       dispatch(setAlert("Attendance updated", "success"));
+//     } catch (err) {
+//       dispatch({
+//         type: POST_ERROR,
+//         payload: { msg: err.response, status: err.response },
+//       });
+//     }
+//   };
+
+// // Get attendance for a course
+// export const archive = (course, year) => async (dispatch) => {
+//   const config = {
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//   };
+//   console.log("FIRING");
+//   try {
+//     const res = await axios.put(
+//       `/api/faculty/archive/${course}/${year}`,
+//       config
+//     );
+//     console.log("FIRING");
+//     dispatch({
+//       type: ARCHIVE,
+//       payload: res.data,
+//     });
+
+//     dispatch(setAlert("Archived", "success"));
+//   } catch (err) {
+//     dispatch({
+//       type: POST_ERROR,
+//       payload: { msg: err.response, status: err.response },
+//     });
+//   }
+// };
+
+// // Get attendance for a course
+// export const unarchive = (course, year) => async (dispatch) => {
+//   const config = {
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//   };
+//   console.log("FIRING");
+//   try {
+//     const res = await axios.put(
+//       `/api/faculty/unarchive/${course}/${year}`,
+//       config
+//     );
+//     console.log("FIRING");
+//     dispatch({
+//       type: UNARCHIVE,
+//       payload: res.data,
+//     });
+
+//     dispatch(setAlert("Unarchived", "success"));
+//   } catch (err) {
+//     dispatch({
+//       type: POST_ERROR,
+//       payload: { msg: err.response, status: err.response },
+//     });
+//   }
+// };
+
+// // Get comment
+// export const getComments = (course, year) => async (dispatch) => {
+//   try {
+//     const res = await axios.get(`/api/faculty/chat/${course}/${year}`);
+
+//     dispatch({
+//       type: GET_COMMENTS,
+//       payload: res.data,
+//     });
+//   } catch (err) {
+//     dispatch({
+//       type: POST_ERROR,
+//       payload: { msg: err.response.statusText, status: err.response.status },
+//     });
+//   }
+// };
+
+// // Add post
+// export const addComment = (formData, course, year) => async (dispatch) => {
+//   const config = {
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//   };
+//   console.log("WORKS");
+//   try {
+//     const res = await axios.post(
+//       `/api/faculty/chat/${course}/${year}`,
+//       formData,
+//       config
+//     );
+//     console.log("FIRING");
+//     dispatch({
+//       type: ADD_COMMENT,
+//       payload: res.data,
+//     });
+
+//     dispatch(setAlert("Comment Created", "success"));
+//   } catch (err) {
+//     dispatch({
+//       type: POST_ERROR,
+//       payload: { msg: err.response, status: err.response.status },
+//     });
+//   }
+// };
+
+
+
+
 import axios from "axios";
 import { setAlert } from "./alert";
 import {
@@ -23,7 +310,7 @@ const BASE_URL = "https://attendance-hvr0.onrender.com";
 //Get subjects
 export const getCourses = () => async (dispatch) => {
   try {
-    const res = await axios.get(`/api/faculty/courses`);
+    const res = await axios.get(`${BASE_URL}/api/faculty/courses`);
 
     dispatch({
       type: GET_COURSES_FACULTY,
@@ -40,7 +327,7 @@ export const getCourses = () => async (dispatch) => {
 // Get attendance for a course
 export const getAttendance = (course) => async (dispatch) => {
   try {
-    const res = await axios.get(`/api/faculty/students/${course}`);
+    const res = await axios.get(`${BASE_URL}/api/faculty/students/${course}`);
 
     dispatch({
       type: GET_ATTENDANCE,
@@ -54,10 +341,10 @@ export const getAttendance = (course) => async (dispatch) => {
   }
 };
 
-// Get attendance for a course
+// Get students for a year
 export const getStudents = (year) => async (dispatch) => {
   try {
-    const res = await axios.get(`/api/faculty/students/${year}`);
+    const res = await axios.get(`${BASE_URL}/api/faculty/students/${year}`);
 
     dispatch({
       type: GET_STUDENTS,
@@ -71,12 +358,12 @@ export const getStudents = (year) => async (dispatch) => {
   }
 };
 
-// Get attendance for a course
+// Get student attendance
 export const getStudentAttendance =
   (year, roll, course) => async (dispatch) => {
     try {
       const res = await axios.get(
-        `/api/faculty/attendance/${year}/${roll}/${course}`
+        `${BASE_URL}/api/faculty/attendance/${year}/${roll}/${course}`
       );
 
       dispatch({
@@ -100,7 +387,7 @@ export const addPost = (formData) => async (dispatch) => {
   };
 
   try {
-    const res = await axios.post(`/api/faculty/courses`, formData, config);
+    const res = await axios.post(`${BASE_URL}/api/faculty/courses`, formData, config);
 
     dispatch({
       type: ADD_POST,
@@ -116,7 +403,7 @@ export const addPost = (formData) => async (dispatch) => {
   }
 };
 
-// Get attendance for a course
+// Mark attendance
 export const markAttendance =
   (year, roll, course, { date, status }) =>
   async (dispatch) => {
@@ -129,7 +416,7 @@ export const markAttendance =
 
     try {
       const res = await axios.post(
-        `/api/faculty/attendance/${year}/${roll}/${course}`,
+        `${BASE_URL}/api/faculty/attendance/${year}/${roll}/${course}`,
         formData,
         config
       );
@@ -148,7 +435,7 @@ export const markAttendance =
     }
   };
 
-// Get attendance for a course
+// Update attendance
 export const updateAttendance =
   (year, roll, course, date, { status }) =>
   async (dispatch) => {
@@ -161,7 +448,7 @@ export const updateAttendance =
     console.log("FIRING");
     try {
       const res = await axios.put(
-        `/api/faculty/attendance/${year}/${roll}/${course}/${date}`,
+        `${BASE_URL}/api/faculty/attendance/${year}/${roll}/${course}/${date}`,
         formData,
         config
       );
@@ -180,7 +467,7 @@ export const updateAttendance =
     }
   };
 
-// Get attendance for a course
+// Archive course
 export const archive = (course, year) => async (dispatch) => {
   const config = {
     headers: {
@@ -190,7 +477,7 @@ export const archive = (course, year) => async (dispatch) => {
   console.log("FIRING");
   try {
     const res = await axios.put(
-      `/api/faculty/archive/${course}/${year}`,
+      `${BASE_URL}/api/faculty/archive/${course}/${year}`,
       config
     );
     console.log("FIRING");
@@ -208,7 +495,7 @@ export const archive = (course, year) => async (dispatch) => {
   }
 };
 
-// Get attendance for a course
+// Unarchive course
 export const unarchive = (course, year) => async (dispatch) => {
   const config = {
     headers: {
@@ -218,7 +505,7 @@ export const unarchive = (course, year) => async (dispatch) => {
   console.log("FIRING");
   try {
     const res = await axios.put(
-      `/api/faculty/unarchive/${course}/${year}`,
+      `${BASE_URL}/api/faculty/unarchive/${course}/${year}`,
       config
     );
     console.log("FIRING");
@@ -236,10 +523,10 @@ export const unarchive = (course, year) => async (dispatch) => {
   }
 };
 
-// Get comment
+// Get comments
 export const getComments = (course, year) => async (dispatch) => {
   try {
-    const res = await axios.get(`/api/faculty/chat/${course}/${year}`);
+    const res = await axios.get(`${BASE_URL}/api/faculty/chat/${course}/${year}`);
 
     dispatch({
       type: GET_COMMENTS,
@@ -253,7 +540,7 @@ export const getComments = (course, year) => async (dispatch) => {
   }
 };
 
-// Add post
+// Add comment
 export const addComment = (formData, course, year) => async (dispatch) => {
   const config = {
     headers: {
@@ -263,7 +550,7 @@ export const addComment = (formData, course, year) => async (dispatch) => {
   console.log("WORKS");
   try {
     const res = await axios.post(
-      `/api/faculty/chat/${course}/${year}`,
+      `${BASE_URL}/api/faculty/chat/${course}/${year}`,
       formData,
       config
     );
